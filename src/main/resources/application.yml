@@ -3,4 +3,5 @@ spring:
     name: webflux
   data:
     mongodb:
-      uri: mongodb://andre:rocketsoketdb@localhost:27017/rocketsoket
+      uri: mongodb://${DB_PASSWORD:andre}:${DB_PASSWORD}@localhost:27017/${DB_NAME}
+      auto-index-creation: true
