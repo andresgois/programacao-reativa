@@ -1,4 +1,4 @@
-db = db.getSiblingDB('rocketsoket');
+db = db.getSiblingDB('curso_webflux');
 db.createUser(
     {
         user: "andre",

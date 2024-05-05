@@ -1,3 +1,6 @@
 spring:
   application:
     name: webflux
+  data:
+    mongodb:
+      uri: mongodb://andre:rocketsoketdb@localhost:27017/rocketsoket

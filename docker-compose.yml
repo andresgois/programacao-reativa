@@ -4,12 +4,12 @@ services:
 
   mongo:
     image: mongo
-    container_name: webfluxdb_container
+    container_name: webflux_container
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: andre
       MONGO_INITDB_ROOT_PASSWORD: 123456
-      MONGO_INITDB_DATABASE: webfluxdb
+      #MONGO_INITDB_DATABASE: webfluxdb
     ports:
       - "27017:27017"
     volumes:
@@ -20,7 +20,7 @@ services:
   mongo-express:
     image: mongo-express
     restart: always
-    container_name: webfluxdb_express
+    container_name: webflux_express
     ports:
       - 8081:8081
     depends_on:
@@ -29,6 +29,9 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: andre
       ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
       ME_CONFIG_MONGODB_URL: mongodb://andre:123456@mongo:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: andre
+      ME_CONFIG_BASICAUTH_PASSWORD: 123456
+      ME_CONFIG_MONGODB_PORT: 27017
     networks:
       - mongo-compose-network
 
