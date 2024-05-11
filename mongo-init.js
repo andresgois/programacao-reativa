@@ -1,11 +1,13 @@
-db = db.getSiblingDB('curso_webflux');
+db = db.getSiblingDB('webfluxdb');
 db.createUser(
     {
-        user: "andre",
+        user: "root",
         pwd: "123456",
         roles: [
             {
-                role: "readWrite",
+                roles: [
+                    { role: "readWrite", db: "webfluxdb" }
+                ],
                 db: "webfluxdb"
             }
         ]
