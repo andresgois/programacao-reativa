@@ -1,15 +1,13 @@
 version: '3.9'
 
 services:
-
   mongo:
     image: mongo
     container_name: webflux_container
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 123456
-      MONGO_INITDB_DATABASE: webfluxdb
+      MONGO_INITDB_ROOT_PASSWORD: root123
     ports:
       - "27017:27017"
     volumes:
@@ -27,10 +25,10 @@ services:
       - mongo
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
-      ME_CONFIG_MONGODB_URL: mongodb://root:123456@mongo:27017/
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root123
+      ME_CONFIG_MONGODB_URL: mongodb://root:root123@mongo:27017/
       ME_CONFIG_BASICAUTH_USERNAME: root
-      ME_CONFIG_BASICAUTH_PASSWORD: 123456
+      ME_CONFIG_BASICAUTH_PASSWORD: root123
       ME_CONFIG_MONGODB_PORT: 27017
     networks:
       - mongo-compose-network
@@ -38,6 +36,8 @@ services:
 networks:
   mongo-compose-network:
     driver: bridge
+
+
 # https://stackoverflow.com/questions/42912755/how-to-create-a-db-for-mongodb-container-on-start-up
 # mongo -u usuário-da-base -p senha-da-base host-de-conexao/nome-da-base
-# mongodb://andre:rocketsoketdb@rocketsoketbanco:27017/
+# mongosh "mongodb://root:123456@localhost:27017/webfluxdb?authSource=admin"
