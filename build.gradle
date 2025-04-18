@@ -28,10 +28,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
+    // lombok
     compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation "org.projectlombok:lombok-mapstruct-biding:0.2.0"
+
+    // mapStruct
+    implementation "org.mapstruct:1.5.3.Final"
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
