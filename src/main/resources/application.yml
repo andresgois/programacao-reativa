@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: webflux
+  data:
+    mongodb:
+      #uri: mongodb://${DB_USER:andre}:${DB_PASSWORD:123456}@localhost:27017/${DB_NAME}?retryWrites=true&w=majority
+      auto-index-creation: true
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      username: ${DB_USER:root}
+      password: ${DB_PASSWORD:123456}
+      database: ${DB_NAME:webfluxdb}
+# mongodb://andre:123456@localhost:27017/curso_webflux?retryWrites=true&w=majority
