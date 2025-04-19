@@ -1,4 +1,4 @@
-package io.andresgois.webflux.controller.domain.response;
+package io.andresgois.webflux.domain.response;
 
 public record UserResponse(
 		String id,

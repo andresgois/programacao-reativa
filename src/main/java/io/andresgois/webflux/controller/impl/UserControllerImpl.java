@@ -2,8 +2,8 @@ package io.andresgois.webflux.controller.impl;
 
 
 import io.andresgois.webflux.controller.UserController;
-import io.andresgois.webflux.controller.domain.request.UserRequest;
-import io.andresgois.webflux.controller.domain.response.UserResponse;
+import io.andresgois.webflux.domain.request.UserRequest;
+import io.andresgois.webflux.domain.response.UserResponse;
 import io.andresgois.webflux.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

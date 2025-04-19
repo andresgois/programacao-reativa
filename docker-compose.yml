@@ -40,4 +40,11 @@ networks:
 
 # https://stackoverflow.com/questions/42912755/how-to-create-a-db-for-mongodb-container-on-start-up
 # mongo -u usuário-da-base -p senha-da-base host-de-conexao/nome-da-base
-# mongosh "mongodb://root:123456@localhost:27017/webfluxdb?authSource=admin"
+# mongosh "mongodb://andre:123456@localhost:27017/webflux?authSource=webflux"
+# db.user.createIndex(
+#  { email: 1 },
+#  { unique: true, name: "indice_email_unico" }
+#)
+
+# db.user.createIndex(  { email: 1 },  { unique: true, name: "indice_email_unico" })
+# db.user.getIndexes()

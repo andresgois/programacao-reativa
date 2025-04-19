@@ -1,6 +1,6 @@
 package io.andresgois.webflux.service;
 
-import io.andresgois.webflux.controller.domain.request.UserRequest;
+import io.andresgois.webflux.domain.request.UserRequest;
 import io.andresgois.webflux.domain.User;
 import io.andresgois.webflux.mapper.UserMapper;
 import io.andresgois.webflux.repository.UserRepository;

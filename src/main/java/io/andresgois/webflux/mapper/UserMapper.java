@@ -1,6 +1,6 @@
 package io.andresgois.webflux.mapper;
 
-import io.andresgois.webflux.controller.domain.request.UserRequest;
+import io.andresgois.webflux.domain.request.UserRequest;
 import io.andresgois.webflux.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,4 +1,4 @@
-package io.andresgois.webflux.controller.domain.request;
+package io.andresgois.webflux.domain.request;
 
 
 import jakarta.validation.constraints.Email;
