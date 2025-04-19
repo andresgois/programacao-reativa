@@ -4,6 +4,7 @@ package io.andresgois.webflux.controller.impl;
 import io.andresgois.webflux.controller.UserController;
 import io.andresgois.webflux.domain.request.UserRequest;
 import io.andresgois.webflux.domain.response.UserResponse;
+import io.andresgois.webflux.mapper.UserMapper;
 import io.andresgois.webflux.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import reactor.core.publisher.Mono;
 public class UserControllerImpl implements UserController {
 
 	private final UserService userService;
+	private final UserMapper userMapper;
 
 	@Override
 	public ResponseEntity<Mono<Void>> save(UserRequest request) {
@@ -27,8 +29,10 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@Override
-	public ResponseEntity<Mono<UserResponse>> find(String id) {
-		return null;
+	public ResponseEntity<Mono<UserResponse>> findById(String id) {
+		return ResponseEntity.ok().body(
+				userService.findById(id).map(obj -> userMapper.toResponse(obj))
+		);
 	}
 
 	@Override
