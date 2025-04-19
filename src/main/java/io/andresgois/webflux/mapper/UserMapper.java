@@ -5,6 +5,7 @@ import io.andresgois.webflux.domain.User;
 import io.andresgois.webflux.domain.response.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -18,4 +19,7 @@ public interface UserMapper {
 	User toEntity(final UserRequest user);
 
 	UserResponse toResponse(final User user);
+
+	@Mapping(target = "id", ignore = true)
+	User toEntity(final UserRequest user, @MappingTarget User entity);
 }
