@@ -13,6 +13,9 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
+import static java.time.LocalDateTime.now;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+
 @ControllerAdvice
 public class ControllerExcetionHandle {
 
@@ -23,9 +26,9 @@ public class ControllerExcetionHandle {
 		return ResponseEntity.badRequest()
 				.body(Mono.just(
 						StandardError.builder()
-								.timestamp(LocalDateTime.now())
-								.status(HttpStatus.BAD_REQUEST.value())
-								.error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+								.timestamp(now())
+								.status(BAD_REQUEST.value())
+								.error(BAD_REQUEST.getReasonPhrase())
 								.message(verifyDupKey(ex.getMessage()))
 								.path(request.getPath().toString())
 								.build()
@@ -38,7 +41,7 @@ public class ControllerExcetionHandle {
 	) {
 		ValidationError error = new ValidationError(
 				LocalDateTime.now(), request.getPath().toString(),
-				HttpStatus.BAD_REQUEST.value(), "Validation error", "Error on validation attributes"
+				BAD_REQUEST.value(), "Validation error", "Error on validation attributes"
 		);
 
 		for (FieldError x : ex.getBindingResult().getFieldErrors()) {
