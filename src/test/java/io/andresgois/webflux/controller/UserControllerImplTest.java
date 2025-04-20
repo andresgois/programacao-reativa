@@ -67,6 +67,26 @@ class UserControllerImplTest {
 	}
 
 	@Test
+	@DisplayName("Test endpoint save with bad request")
+	void testSaveWithBadRequest() {
+		final var request = new UserRequest(NAME.concat(" "), EMAIL, PASSWORD);
+
+		webTestClient.post().uri(BASE_URI)
+				.contentType(APPLICATION_JSON)
+				.body(fromValue(request))
+				.exchange()
+				.expectStatus().isBadRequest()
+				.expectBody()
+				.jsonPath("$.path").isEqualTo(BASE_URI)
+				.jsonPath("$.status").isEqualTo(BAD_REQUEST.value())
+				.jsonPath("$.error").isEqualTo("Validation error")
+				.jsonPath("$.message").isEqualTo("Error on validation attributes")
+				.jsonPath("$.errors[0].fieldName").isEqualTo("name")
+				.jsonPath("$.errors[0].message").isEqualTo("field cannot have blank spaces at the beginning or at end");
+
+	}
+
+	@Test
 	void findById() {
 	}
 
