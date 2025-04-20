@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
@@ -34,8 +35,8 @@ class UserServiceTest {
 		UserRequest userRequest = new UserRequest("Andre","an@email.com","123");
 		User user = User.builder().build();
 
-		when(mapper.toEntity(Mockito.any(UserRequest.class))).thenReturn(user);
-		when(repository.save(Mockito.any(User.class))).thenReturn(Mono.just( User.builder().build()));
+		when(mapper.toEntity(any(UserRequest.class))).thenReturn(user);
+		when(repository.save(any(User.class))).thenReturn(Mono.just( User.builder().build()));
 
 		Mono<User> result = service.save(userRequest);
 
@@ -45,7 +46,7 @@ class UserServiceTest {
 				.expectComplete()
 				.verify();
 
-		Mockito.verify(repository, times(1)).save(Mockito.any(User.class));
+		Mockito.verify(repository, times(1)).save(any(User.class));
 	}
 
 	@Test
@@ -77,7 +78,22 @@ class UserServiceTest {
 	}
 
 	@Test
-	void update() {
+	void testUpdate() {
+		UserRequest request = new UserRequest("valdir", "valdir@mail.com", "123");
+		User entity = User.builder().build();
+
+		when(mapper.toEntity(any(UserRequest.class), any(User.class))).thenReturn(entity);
+		when(repository.findById(anyString())).thenReturn(Mono.just(entity));
+		when(repository.save(any(User.class))).thenReturn(Mono.just(entity));
+
+		Mono<User> result = service.update("123", request);
+
+		StepVerifier.create(result)
+				.expectNextMatches(user -> user.getClass() == User.class)
+				.expectComplete()
+				.verify();
+
+		Mockito.verify(repository, times(1)).save(any(User.class));
 	}
 
 	@Test
