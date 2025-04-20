@@ -120,7 +120,7 @@ class UserServiceTest {
 			service.findById("123").block();
 		} catch (Exception ex) {
 			assertEquals(ObjectNotFoundException.class, ex.getClass());
-			assertEquals(format("Object not found. Id: %s, Type: %s", "123", User.class.getSimpleName()), ex.getMessage());
+			assertEquals(format("Object not found. Id: %s Type: %s", "123", User.class.getSimpleName()), ex.getMessage());
 		}
 	}
 }
