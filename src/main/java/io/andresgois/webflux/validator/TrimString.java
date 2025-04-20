@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TrimString {
-	String message() default "Field cannot be have blank spaces at begging or at end.";
+	String message() default "field cannot have blank spaces at the beginning or at end";
 
 	Class<?>[] groups() default {};
 
