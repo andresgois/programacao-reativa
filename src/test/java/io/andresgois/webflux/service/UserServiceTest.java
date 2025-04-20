@@ -14,6 +14,9 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -21,7 +24,7 @@ class UserServiceTest {
 	@Mock
 	private UserRepository repository;
 	@InjectMocks
-	private UserService userService;
+	private UserService service;
 	@Mock
 	private UserMapper mapper;
 
@@ -30,10 +33,10 @@ class UserServiceTest {
 		UserRequest userRequest = new UserRequest("Andre","an@email.com","123");
 		User user = User.builder().build();
 
-		Mockito.when(mapper.toEntity(Mockito.any(UserRequest.class))).thenReturn(user);
-		Mockito.when(repository.save(Mockito.any(User.class))).thenReturn(Mono.just( User.builder().build()));
+		when(mapper.toEntity(Mockito.any(UserRequest.class))).thenReturn(user);
+		when(repository.save(Mockito.any(User.class))).thenReturn(Mono.just( User.builder().build()));
 
-		Mono<User> result = userService.save(userRequest);
+		Mono<User> result = service.save(userRequest);
 
 		// verifica o comportamento de um publisher no caso o result
 		StepVerifier.create(result)
@@ -41,11 +44,21 @@ class UserServiceTest {
 				.expectComplete()
 				.verify();
 
-		Mockito.verify(repository, Mockito.times(1)).save(Mockito.any(User.class));
+		Mockito.verify(repository, times(1)).save(Mockito.any(User.class));
 	}
 
 	@Test
-	void findById() {
+	void testFindById() {
+		when(repository.findById(anyString())).thenReturn(Mono.just(User.builder().build()));
+
+		Mono<User> result = service.findById("123");
+
+		StepVerifier.create(result)
+				.expectNextMatches(user -> user.getClass() == User.class)
+				.expectComplete()
+				.verify();
+
+		Mockito.verify(repository, times(1)).findById(anyString());
 	}
 
 	@Test
